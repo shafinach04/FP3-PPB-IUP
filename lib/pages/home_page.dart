@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:ppb_fp/services/firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'dart:io';
-
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,17 +17,6 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _priceController = TextEditingController();
   File? _imageFile;
 
-  // Future<void> _addMenuItem() async {
-  //   if (_nameController.text.isNotEmpty && _priceController.text.isNotEmpty && _imageFile != null) {
-  //     double? price = double.tryParse(_priceController.text);
-  //     if (price != null) {
-  //       String pictureUrl = await _firestoreService.uploadImage(_imageFile!);
-  //       await _firestoreService.addMenuItem(_nameController.text, price, pictureUrl);
-  //       Navigator.of(context).pop();
-  //     }
-  //   }
-  // }
-
   Future<void> _addMenuItem() async {
     if (_nameController.text.isNotEmpty && _priceController.text.isNotEmpty && _imageFile != null) {
       double? price = double.tryParse(_priceController.text);
@@ -37,30 +25,27 @@ class _HomePageState extends State<HomePage> {
           String pictureUrl = await _firestoreService.uploadImage(_imageFile!);
           await _firestoreService.addMenuItem(_nameController.text, price, pictureUrl);
           Navigator.of(context).pop();
+          _clearForm();
         } catch (e) {
           print('Error adding menu item: $e');
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error adding menu item: $e')));
         }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please enter a valid price.')));
       }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please fill all fields and select an image.')));
     }
   }
 
-  // Future<void> _pickImage() async {
-  //   final ImagePicker _picker = ImagePicker();
-  //   final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-  //   if (image != null) {
-  //     setState(() {
-  //       _imageFile = File(image.path);
-  //     });
-  //   }
-  // }
-
-  Future<void> _pickImage() async {
-    File? pickedFile = await _firestoreService.pickImage();
-    if (pickedFile != null) {
-      setState(() {
-        _imageFile = pickedFile;
-      });
+  Future<File?> getImage() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
+    if (result != null && result.files.single.path != null) {
+      print('Picked file path: ${result.files.single.path}');
+      return File(result.files.single.path!);
+    } else {
+      print('No file selected');
+      return null;
     }
   }
 
@@ -95,8 +80,16 @@ class _HomePageState extends State<HomePage> {
                     ? Image.file(_imageFile!)
                     : Text('No image selected'),
                 ElevatedButton(
-                  onPressed: _pickImage,
-                  child: Text('Pick Image'),
+                  child: Text('Upload Image'),
+                  onPressed: () async {
+                    File? file = await getImage();
+                    if (file != null) {
+                      setState(() {
+                        _imageFile = file;
+                        print('Image file set: ${_imageFile?.path}');
+                      });
+                    }
+                  },
                 ),
               ],
             ),
