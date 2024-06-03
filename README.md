@@ -12,4 +12,6 @@ List of Member:
 - Ghifari - 5025211063
 - Shafina Chaerunisa - 5025201129
 
-![image](https://github.com/shafinach04/PPB-FP-IUP-3/assets/112922727/a89bce6f-a14f-4540-be50-568ec0371035)
+
+![image](https://github.com/shafinach04/FP3-PPB-IUP/assets/112922727/9491f15f-2481-48af-92d1-d3c1223bf684)
+
