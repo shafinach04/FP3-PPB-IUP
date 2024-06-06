@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ppb_fp/pages/staff_management_page.dart';
 import 'package:ppb_fp/pages/reservation_list_page.dart';
 import 'package:ppb_fp/pages/manage_menu_page.dart';
+import 'package:ppb_fp/pages/menu_page.dart';
 
 class AdminDashboard extends StatelessWidget {
   @override
@@ -64,7 +65,7 @@ class AdminDashboard extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ManageMenuPage()),
+                      MaterialPageRoute(builder: (context) => UploadImageAndMore()),
                     );
                   },
                 ),

@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       body: TabBarView(
         controller: _tabController,
         children: [
-          MenuPage(),
+          // UploadImageAndMore(),
           ReservationPage(),
         ],
       ),
