@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ppb_fp/pages/menu_form.dart';
+import 'package:ppb_fp/pages/menu_page.dart';
+import 'package:ppb_fp/pages/home_page.dart';
+import 'package:ppb_fp/pages/admin_dashboard.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -8,7 +10,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -16,9 +18,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: UploadImageAndMore(),
+    return MaterialApp(
+      // debugShowCheckedModeBanner: false,
+      home: AdminDashboard(),
     );
   }
 }
