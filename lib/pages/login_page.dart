@@ -1,17 +1,26 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+   LoginPage({super.key, required this.onTap});
+
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final Function()? onTap;
+  void SignIn(){
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: Center(
           child: Column(
             children: [
 
-              const Icon(
+              Icon(
                 Icons.person,
                 size: 200,
               ),
@@ -30,6 +39,7 @@ class LoginPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: TextField(
+                  controller: usernameController,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black38),
@@ -39,6 +49,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     fillColor: Colors.black12,
                     filled: true,
+                    hintText: 'Username',
                   ),
                 ),
               ),
@@ -48,6 +59,7 @@ class LoginPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: TextField(
+                  controller: passwordController,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black38),
@@ -57,6 +69,31 @@ class LoginPage extends StatelessWidget {
                     ),
                     fillColor: Colors.black12,
                     filled: true,
+                    hintText: 'Password',
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 10),
+
+              GestureDetector(
+                onTap: SignIn,
+                child: Container(
+                  padding: EdgeInsets.all(25),
+                  margin: EdgeInsets.symmetric(horizontal: 25),
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(8)
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "Sign in",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        )
+                    ),
                   ),
                 ),
               )

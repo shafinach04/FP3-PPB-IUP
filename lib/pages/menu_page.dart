@@ -169,18 +169,26 @@ class _UploadImageAndMoreState extends State<UploadImageAndMore> {
                               fontWeight: FontWeight.bold, fontSize: 17),
                         ),
                         subtitle: Text("${thisItems['price']}"),
-                        leading: CircleAvatar(
-                          radius: 27,
-                          child: thisItems.containsKey('image')
-                              ? ClipOval(
-                            child: Image.network(
-                              "${thisItems['image']}",
-                              fit: BoxFit.cover,
-                              height: 70,
-                              width: 70,
-                            ),
-                          )
-                              : const CircleAvatar(),
+                        trailing: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(20)
+                          ),
+                          child: SizedBox(
+                            height: 100,
+                            width: 100,
+                            child: thisItems.containsKey('image')
+                                ? ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.network(
+                                "${thisItems['image']}",
+                                fit: BoxFit.cover,
+                                height: 42,
+                                width: 42,
+                              ),
+                            )
+                                : const CircleAvatar(),
+                          ),
                         ));
                   });
             }
