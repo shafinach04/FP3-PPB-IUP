@@ -28,6 +28,12 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Explain why user should allow to your app to access NSPhotoLibraryUsageDescription</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Explain why user should allow to your app to access NSCameraUsageDescription</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Explain why user should allow to your app to access NSMicrophoneUsageDescription</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

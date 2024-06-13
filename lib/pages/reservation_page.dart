@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 class ReservationPage extends StatefulWidget {
+  const ReservationPage({super.key});
+
   @override
   _ReservationPageState createState() => _ReservationPageState();
 }
@@ -22,10 +24,11 @@ class _ReservationPageState extends State<ReservationPage> {
       firstDate: DateTime(2024),
       lastDate: DateTime(2030),
     );
-    if (picked != null && picked != _selectedDate)
+    if (picked != null && picked != _selectedDate) {
       setState(() {
         _selectedDate = picked;
       });
+    }
   }
 
   void _submitReservation() {
@@ -38,7 +41,7 @@ class _ReservationPageState extends State<ReservationPage> {
         'party': _partySize,
       }).then((value) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Your reservation is successful')),
+          const SnackBar(content: Text('Your reservation is successful')),
         );
 
         //clear reservation form
@@ -53,7 +56,7 @@ class _ReservationPageState extends State<ReservationPage> {
       }).catchError((error) {
         print("Failed to add reservation: $error");
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to make a reservation')),
+          const SnackBar(content: Text('Failed to make a reservation')),
         );
       });
     }
@@ -63,17 +66,17 @@ class _ReservationPageState extends State<ReservationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Reservation'),
+        title: const Text('Reservation'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: ListView(
             children: <Widget>[
               TextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: const InputDecoration(labelText: 'Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your name';
@@ -83,7 +86,7 @@ class _ReservationPageState extends State<ReservationPage> {
               ),
               TextFormField(
                 controller: _phoneController,
-                decoration: InputDecoration(labelText: 'Phone Number'),
+                decoration: const InputDecoration(labelText: 'Phone Number'),
                 keyboardType: TextInputType.phone,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -94,15 +97,14 @@ class _ReservationPageState extends State<ReservationPage> {
               ),
               ListTile(
                 title: Text("Date: ${_selectedDate == null ? '' : DateFormat.yMd().format(_selectedDate!)}"),
-                trailing: Icon(Icons.calendar_today),
+                trailing: const Icon(Icons.calendar_today),
                 onTap: () => _selectDate(context),
               ),
               DropdownButtonFormField<String>(
-                decoration: InputDecoration(labelText: 'Time'),
+                decoration: const InputDecoration(labelText: 'Time'),
                 value: _selectedTime,
                 items: [
-                  for (var i = 10; i <= 22; i++)
-                    DropdownMenuItem(value: '$i:00', child: Text('$i:00')),
+                  for (var i = 10; i <= 22; i++) DropdownMenuItem(value: '$i:00', child: Text('$i:00')),
                 ],
                 onChanged: (value) {
                   setState(() {
@@ -123,7 +125,7 @@ class _ReservationPageState extends State<ReservationPage> {
                   Row(
                     children: <Widget>[
                       IconButton(
-                        icon: Icon(Icons.remove),
+                        icon: const Icon(Icons.remove),
                         onPressed: () {
                           setState(() {
                             if (_partySize > 1) _partySize--;
@@ -131,7 +133,7 @@ class _ReservationPageState extends State<ReservationPage> {
                         },
                       ),
                       IconButton(
-                        icon: Icon(Icons.add),
+                        icon: const Icon(Icons.add),
                         onPressed: () {
                           setState(() {
                             _partySize++;
@@ -142,10 +144,10 @@ class _ReservationPageState extends State<ReservationPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _submitReservation,
-                child: Text('Book'),
+                child: const Text('Book'),
               ),
             ],
           ),
