@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ppb_fp/pages/menu_page.dart';
 import 'package:ppb_fp/pages/home_page.dart';
+import 'package:ppb_fp/pages/login_page.dart';
 import 'package:ppb_fp/pages/admin_dashboard.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       // debugShowCheckedModeBanner: false,
-      home: AdminDashboard(),
+      home: LoginPage(),
     );
   }
 }

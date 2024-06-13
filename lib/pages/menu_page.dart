@@ -95,26 +95,30 @@ class _UploadImageAndMoreState extends State<UploadImageAndMore> {
                 Center(
                     child: ElevatedButton(
                         onPressed: () async {
-                          if (imageUrl.isEmpty) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text(
-                                        "Please select and upload image")));
-                            return;
-                          }
-                          final String name = _nameController.text;
-                          final int? price =
-                          int.tryParse(_priceController.text);
-                          if (price != null) {
-                            await _items.add({
-                              // Add items in you firebase firestore
-                              "name": name,
-                              "price": price,
-                              "image": imageUrl,
-                            });
-                            _nameController.text = '';
-                            _priceController.text = '';
-                            Navigator.of(context).pop();
+                          try {
+                            if (imageUrl.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text(
+                                          "Please select and upload image")));
+                              return;
+                            }
+                            final String name = _nameController.text;
+                            final String price = _priceController.text;
+                            // int.tryParse(_priceController.text);
+                            if (price != null) {
+                              await _items.add({
+                                // Add items in you firebase firestore
+                                "name": name,
+                                "price": price,
+                                "image": imageUrl,
+                              });
+                              _nameController.text = '';
+                              _priceController.text = '';
+                              Navigator.of(context).pop();
+                            }
+                          }catch (e) {
+                            print('Failed to add item: $e');
                           }
                         },
                         child: const Text('Create')))
