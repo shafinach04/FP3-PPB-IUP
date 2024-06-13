@@ -1,7 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ppb_fp/services/firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:ppb_fp/pages/menu_page.dart';
 import 'package:ppb_fp/pages/reservation_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,10 +25,10 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Restaurant X'),
+        title: const Text('Restaurant X'),
         actions: [
           IconButton(
-            icon: Icon(Icons.login),
+            icon: const Icon(Icons.login),
             onPressed: () {
               // Handle login action
             },
@@ -39,7 +36,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         ],
         bottom: TabBar(
           controller: _tabController,
-          tabs: [
+          tabs: const [
             Tab(text: 'Menu'),
             Tab(text: 'Reservation'),
           ],
@@ -47,7 +44,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [
+        children: const [
           // UploadImageAndMore(),
           ReservationPage(),
         ],

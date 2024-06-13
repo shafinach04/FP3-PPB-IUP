@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 
 
@@ -55,20 +53,9 @@ class FirestoreService{
       return downloadUrl;
     } catch (e) {
       print('Error uploading image: $e');
-      throw e; // Re-throw the error to handle it further up the call stack
+      rethrow; // Re-throw the error to handle it further up the call stack
     }
   }
 
-
-  //pick image
-  // Future<File?> pickImage() async {
-  //   final ImagePicker _picker = ImagePicker();
-  //   final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-  //   if (image != null) {
-  //     return File(image.path);
-  //   }
-  //   return null;
-  // }
-
-
+  
 }

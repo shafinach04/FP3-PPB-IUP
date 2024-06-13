@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,23 +17,18 @@ class _UploadImageAndMoreState extends State<UploadImageAndMore> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
 
-  final CollectionReference _items =
-  FirebaseFirestore.instance.collection("Upload_Items");
+  final CollectionReference _items = FirebaseFirestore.instance.collection("Upload_Items");
   // collection name must be same as firebase collection name
 
   String imageUrl = '';
 
-  Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
+  Future<void> _create() async {
     await showModalBottomSheet(
         isScrollControlled: true,
         context: context,
         builder: (BuildContext ctx) {
           return Padding(
-            padding: EdgeInsets.only(
-                top: 20,
-                right: 20,
-                left: 20,
-                bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
+            padding: EdgeInsets.only(top: 20, right: 20, left: 20, bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,13 +38,11 @@ class _UploadImageAndMoreState extends State<UploadImageAndMore> {
                 ),
                 TextField(
                   controller: _nameController,
-                  decoration: const InputDecoration(
-                      labelText: 'Name', hintText: 'eg Pizza'),
+                  decoration: const InputDecoration(labelText: 'Name', hintText: 'e.g. Pizza'),
                 ),
                 TextField(
                   controller: _priceController,
-                  decoration: const InputDecoration(
-                      labelText: 'Price', hintText: 'eg 10 in dollar'),
+                  decoration: const InputDecoration(labelText: 'Price', hintText: 'e.g. Rp 10000'),
                 ),
                 const SizedBox(
                   height: 10,
@@ -59,36 +51,29 @@ class _UploadImageAndMoreState extends State<UploadImageAndMore> {
                     child: IconButton(
                         onPressed: () async {
                           // add the package image_picker
-                          final file = await ImagePicker()
-                              .pickImage(source: ImageSource.gallery);
+                          final file = await ImagePicker().pickImage(source: ImageSource.gallery);
                           if (file == null) return;
 
-                          String fileName =
-                          DateTime.now().microsecondsSinceEpoch.toString();
+                          String fileName = DateTime.now().microsecondsSinceEpoch.toString();
 
                           // Get the reference to storage root
                           // We create the image folder first and insider folder we upload the image
-                          Reference referenceRoot =
-                          FirebaseStorage.instance.ref();
-                          Reference referenceDireImages =
-                          referenceRoot.child('images');
+                          Reference referenceRoot = FirebaseStorage.instance.ref();
+                          Reference referenceDireImages = referenceRoot.child('images');
 
                           // we have creata reference for the image to be stored
-                          Reference referenceImageaToUpload =
-                          referenceDireImages.child(fileName);
+                          Reference referenceImageaToUpload = referenceDireImages.child(fileName);
 
                           // For errors handled and/or success
                           try {
-                            await referenceImageaToUpload
-                                .putFile(File(file.path));
+                            await referenceImageaToUpload.putFile(File(file.path));
 
                             // We have successfully upload the image now
                             // make this upload image link in firebase database
 
-                            imageUrl =
-                            await referenceImageaToUpload.getDownloadURL();
+                            imageUrl = await referenceImageaToUpload.getDownloadURL();
                           } catch (error) {
-                            //some error
+                            // some error
                           }
                         },
                         icon: const Icon(Icons.camera_alt))),
@@ -97,27 +82,23 @@ class _UploadImageAndMoreState extends State<UploadImageAndMore> {
                         onPressed: () async {
                           try {
                             if (imageUrl.isEmpty) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text(
-                                          "Please select and upload image")));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(content: Text("Please select and upload image")));
                               return;
                             }
                             final String name = _nameController.text;
                             final String price = _priceController.text;
                             // int.tryParse(_priceController.text);
-                            if (price != null) {
-                              await _items.add({
-                                // Add items in you firebase firestore
-                                "name": name,
-                                "price": price,
-                                "image": imageUrl,
-                              });
-                              _nameController.text = '';
-                              _priceController.text = '';
-                              Navigator.of(context).pop();
-                            }
-                          }catch (e) {
+                            await _items.add({
+                              // Add items in you firebase firestore
+                              "name": name,
+                              "price": price,
+                              "image": imageUrl,
+                            });
+                            _nameController.text = '';
+                            _priceController.text = '';
+                            Navigator.of(context).pop();
+                          } catch (e) {
                             print('Failed to add item: $e');
                           }
                         },
@@ -165,21 +146,20 @@ class _UploadImageAndMoreState extends State<UploadImageAndMore> {
                     return ListTile(
                         title: Text(
                           "${thisItems['name']}",
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17),
+                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                         ),
-                        subtitle: Text("${thisItems['price']}"),
+                        subtitle: Text("Rp ${thisItems['price']}"),
                         leading: CircleAvatar(
                           radius: 27,
                           child: thisItems.containsKey('image')
                               ? ClipOval(
-                            child: Image.network(
-                              "${thisItems['image']}",
-                              fit: BoxFit.cover,
-                              height: 70,
-                              width: 70,
-                            ),
-                          )
+                                  child: Image.network(
+                                    "${thisItems['image']}",
+                                    fit: BoxFit.cover,
+                                    height: 70,
+                                    width: 70,
+                                  ),
+                                )
                               : const CircleAvatar(),
                         ));
                   });

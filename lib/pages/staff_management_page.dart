@@ -1,14 +1,25 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class StaffManagementPage extends StatelessWidget {
+class StaffManagementPage extends StatefulWidget {
+  const StaffManagementPage({super.key});
+
+  @override
+  State<StaffManagementPage> createState() => _StaffManagementState();
+}
+
+class _StaffManagementState extends State<StaffManagementPage> {
+  final TextEditingController _staffName = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Staff Management'),
+        title: const Text("Staff Management"),
       ),
-      body: Center(
-        child: Text('Staff Management Page'),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
       ),
     );
   }
