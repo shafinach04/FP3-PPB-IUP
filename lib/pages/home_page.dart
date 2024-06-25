@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ppb_fp/pages/auth_page.dart';
 import 'package:ppb_fp/pages/reservation_page.dart';
 
 void main() {
@@ -70,6 +71,10 @@ class _HomePageState extends State<HomePage> {
             icon: const Icon(Icons.account_circle_rounded),
             onPressed: () {
               // Handle login action
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AuthPage()),
+              );
             },
           ),
         ],

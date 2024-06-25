@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ppb_fp/pages/home_page.dart';
 import 'package:ppb_fp/pages/staff_management_page.dart';
 import 'package:ppb_fp/pages/reservation_list_page.dart';
 import 'package:ppb_fp/pages/menu_page.dart';
@@ -35,6 +37,12 @@ class _AdminDashboardState extends State<AdminDashboard> {
             icon: const Icon(Icons.logout),
             onPressed: () {
               // Handle logout action
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
+              FirebaseAuth.instance.signOut();
+
             },
           ),
         ],

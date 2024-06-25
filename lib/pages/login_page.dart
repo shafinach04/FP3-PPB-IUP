@@ -1,14 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ppb_fp/components/my_textfield.dart';
+import 'package:ppb_fp/components/sign_in_button.dart';
 
 class LoginPage extends StatelessWidget {
-   LoginPage({super.key, required this.onTap});
+  LoginPage({super.key});
 
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  final Function()? onTap;
-  void SignIn(){
-
+  // final Function()? onTap;
+  void signIn () async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: usernameController.text,
+        password: passwordController.text,
+    );
   }
 
 
@@ -18,6 +24,7 @@ class LoginPage extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
 
               Icon(
@@ -36,66 +43,24 @@ class LoginPage extends StatelessWidget {
 
               SizedBox(height: 25,),
 
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25.0),
-                child: TextField(
-                  controller: usernameController,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black38),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black12),
-                    ),
-                    fillColor: Colors.black12,
-                    filled: true,
-                    hintText: 'Username',
-                  ),
-                ),
+              myTextField(
+                controller: usernameController,
+                hintText: 'username',
+                obscureText: false,
               ),
 
               SizedBox(height: 10),
 
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25.0),
-                child: TextField(
+              myTextField(
                   controller: passwordController,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black38),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black12),
-                    ),
-                    fillColor: Colors.black12,
-                    filled: true,
-                    hintText: 'Password',
-                  ),
-                ),
+                  hintText: 'Password',
+                  obscureText: true,
               ),
 
               SizedBox(height: 10),
 
-              GestureDetector(
-                onTap: SignIn,
-                child: Container(
-                  padding: EdgeInsets.all(25),
-                  margin: EdgeInsets.symmetric(horizontal: 25),
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(8)
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "Sign in",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        )
-                    ),
-                  ),
-                ),
+              signInButton(
+                  onTap: signIn
               )
 
             ],
