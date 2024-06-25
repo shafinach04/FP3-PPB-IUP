@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ppb_fp/pages/auth_page.dart';
+import 'package:ppb_fp/pages/manage_menu_page.dart';
 import 'package:ppb_fp/pages/reservation_page.dart';
 
 void main() {
@@ -110,8 +111,10 @@ class _HomePageState extends State<HomePage> {
               leading: const Icon(Icons.menu_book),
               title: const Text('Menu'),
               onTap: () {
-                _onItemTapped(1);
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ShowMenu()),
+                );
               },
             ),
             ListTile(
