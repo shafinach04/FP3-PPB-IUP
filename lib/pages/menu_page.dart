@@ -29,8 +29,7 @@ class _UploadImageAndMoreState extends State<UploadImageAndMore> {
       context: context,
       builder: (BuildContext ctx) {
         return Padding(
-          padding: EdgeInsets.only(
-              top: 20, right: 20, left: 20, bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
+          padding: EdgeInsets.only(top: 20, right: 20, left: 20, bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,6 +87,7 @@ class _UploadImageAndMoreState extends State<UploadImageAndMore> {
 
                       _nameController.clear();
                       _priceController.clear();
+                      if (!mounted) return;
                       Navigator.of(context).pop();
                     } catch (e) {
                       print('Failed to add item: $e');
@@ -107,14 +107,13 @@ class _UploadImageAndMoreState extends State<UploadImageAndMore> {
     _nameController.text = documentSnapshot['name'];
     _priceController.text = documentSnapshot['price'];
     imageUrl = documentSnapshot['image'];
-  
+
     await showModalBottomSheet(
       isScrollControlled: true,
       context: context,
       builder: (BuildContext ctx) {
         return Padding(
-          padding: EdgeInsets.only(
-              top: 20, right: 20, left: 20, bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
+          padding: EdgeInsets.only(top: 20, right: 20, left: 20, bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,6 +171,7 @@ class _UploadImageAndMoreState extends State<UploadImageAndMore> {
 
                       _nameController.clear();
                       _priceController.clear();
+                      if (!mounted) return;
                       Navigator.of(context).pop();
                     } catch (e) {
                       print('Failed to update item: $e');
@@ -267,14 +267,14 @@ class _UploadImageAndMoreState extends State<UploadImageAndMore> {
                               width: 100,
                               child: thisItem.containsKey('image')
                                   ? ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
-                                  "${thisItem['image']}",
-                                  fit: BoxFit.cover,
-                                  height: 42,
-                                  width: 42,
-                                ),
-                              )
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: Image.network(
+                                        "${thisItem['image']}",
+                                        fit: BoxFit.cover,
+                                        height: 42,
+                                        width: 42,
+                                      ),
+                                    )
                                   : const CircleAvatar(),
                             ),
                           ),
