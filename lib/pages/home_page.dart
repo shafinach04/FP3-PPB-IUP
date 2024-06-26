@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:ppb_fp/pages/auth_page.dart';
-import 'package:ppb_fp/pages/manage_menu_page.dart';
 import 'package:ppb_fp/pages/reservation_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,11 +17,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         primaryColor: Colors.blueGrey,
         scaffoldBackgroundColor: Colors.black,
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           color: Colors.blueGrey,
         ),
       ),
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
@@ -37,10 +37,10 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    ShowMenu(), // ShowMenu will be the grid view displaying menu items
+    const ShowMenu(), // ShowMenu will be the grid view displaying menu items
     Container(
       color: Colors.grey[850],
-      child: Center(
+      child: const Center(
         child: Text(
           'Profile Page Content',
           style: TextStyle(color: Colors.white),
@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
   void _navigateToHome(BuildContext context) {
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => HomePage()),
+      MaterialPageRoute(builder: (context) => const HomePage()),
           (route) => false,
     );
   }
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
               // Handle login action
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AuthPage()),
+                MaterialPageRoute(builder: (context) => const AuthPage()),
               );
             },
           ),
@@ -93,12 +93,12 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.blueGrey,
               ),
               child: Container(
                 alignment: Alignment.center,
-                child: Text(
+                child: const Text(
                   'Restaurant X',
                   style: TextStyle(
                     color: Colors.white,
@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ReservationPage()),
+                  MaterialPageRoute(builder: (context) => const ReservationPage()),
                 ).then((_) {
                   setState(() {
                     _selectedIndex = 0; // Ensure HomePage is selected
@@ -151,6 +151,8 @@ class _HomePageState extends State<HomePage> {
 }
 
 class ShowMenu extends StatefulWidget {
+  const ShowMenu({super.key});
+
   @override
   _ShowMenuState createState() => _ShowMenuState();
 }
@@ -181,7 +183,7 @@ class _ShowMenuState extends State<ShowMenu> {
 
             return GridView.builder(
               padding: const EdgeInsets.all(10.0),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 10.0,
                 mainAxisSpacing: 10.0,
@@ -200,7 +202,7 @@ class _ShowMenuState extends State<ShowMenu> {
                     children: [
                       Expanded(
                         child: ClipRRect(
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(15.0),
                             topRight: Radius.circular(15.0),
                           ),
@@ -217,12 +219,12 @@ class _ShowMenuState extends State<ShowMenu> {
                           children: [
                             Text(
                               "${thisItem['name']}",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                               ),
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text(
                               "Rp ${thisItem['price']}",
                               style: TextStyle(

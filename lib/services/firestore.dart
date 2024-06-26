@@ -2,13 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 
-
-class FirestoreService{
+class FirestoreService {
   final CollectionReference menu = FirebaseFirestore.instance.collection('menu');
   final FirebaseStorage storage = FirebaseStorage.instance;
+  final CollectionReference staff = FirebaseFirestore.instance.collection("staff");
 
   //Create
-  Future<void> addMenuItem(String name, double price, String pictureUrl){
+  Future<void> addMenuItem(String name, double price, String pictureUrl) {
     return menu.add({
       'name': name,
       'price': price,
@@ -19,15 +19,21 @@ class FirestoreService{
 
   //Read
   Stream<QuerySnapshot> getMenuItemsStream() {
-    final menuStream  =
-    menu.orderBy('timestamp', descending: true).snapshots();
-    return menuStream ;
+    final menuStream = menu.orderBy('timestamp', descending: true).snapshots();
+    return menuStream;
+  }
 
+  Future<void> addStaff(String staffName, String staffUsername, String staffPassword) {
+    return staff.add({
+      "staffName": staffName,
+      "staffUsername": staffUsername,
+      "staffPassword": staffPassword,
+    });
   }
 
   //update
-  Future<void> updateMenuItem(String docID, String newName, double newPrice, String newPictureUrl){
-    return menu.doc(docID).update( {
+  Future<void> updateMenuItem(String docID, String newName, double newPrice, String newPictureUrl) {
+    return menu.doc(docID).update({
       'name': newName,
       'price': newPrice,
       'pictureUrl': newPictureUrl,
@@ -36,7 +42,7 @@ class FirestoreService{
   }
 
   //delete
-  Future<void> deleteMenuItem(String docID){
+  Future<void> deleteMenuItem(String docID) {
     return menu.doc(docID).delete();
   }
 
@@ -56,6 +62,4 @@ class FirestoreService{
       rethrow; // Re-throw the error to handle it further up the call stack
     }
   }
-
-  
 }

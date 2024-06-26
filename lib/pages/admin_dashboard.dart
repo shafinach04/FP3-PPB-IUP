@@ -39,7 +39,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
               // Handle logout action
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage()),
+                MaterialPageRoute(builder: (context) => const HomePage()),
               );
               FirebaseAuth.instance.signOut();
 

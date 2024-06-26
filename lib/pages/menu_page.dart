@@ -104,12 +104,10 @@ class _UploadImageAndMoreState extends State<UploadImageAndMore> {
   }
 
   Future<void> _update(DocumentSnapshot documentSnapshot) async {
-    if (documentSnapshot != null) {
-      _nameController.text = documentSnapshot['name'];
-      _priceController.text = documentSnapshot['price'];
-      imageUrl = documentSnapshot['image'];
-    }
-
+    _nameController.text = documentSnapshot['name'];
+    _priceController.text = documentSnapshot['price'];
+    imageUrl = documentSnapshot['image'];
+  
     await showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -243,11 +241,11 @@ class _UploadImageAndMoreState extends State<UploadImageAndMore> {
                         },
                         itemBuilder: (BuildContext context) {
                           return [
-                            PopupMenuItem(
+                            const PopupMenuItem(
                               value: 'edit',
                               child: Icon(Icons.edit),
                             ),
-                            PopupMenuItem(
+                            const PopupMenuItem(
                               value: 'delete',
                               child: Icon(Icons.delete),
                             ),

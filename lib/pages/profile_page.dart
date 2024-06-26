@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -10,7 +9,7 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Profile'),
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'Profile Page Content',
           style: TextStyle(color: Colors.white, fontSize: 20),

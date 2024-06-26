@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ppb_fp/pages/admin_dashboard.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:ppb_fp/pages/auth_page.dart';
+import 'package:ppb_fp/pages/admin_dashboard.dart';
 import 'package:ppb_fp/pages/home_page.dart';
-import 'package:ppb_fp/pages/login_page.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -19,9 +17,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: AdminDashboard(),
     );
   }
 }
