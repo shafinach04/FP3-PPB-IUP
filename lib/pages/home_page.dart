@@ -49,12 +49,6 @@ class _HomePageState extends State<HomePage> {
     ),
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   void _navigateToHome(BuildContext context) {
     Navigator.pushAndRemoveUntil(
       context,
@@ -146,7 +140,7 @@ class ShowMenu extends StatefulWidget {
   const ShowMenu({super.key});
 
   @override
-  _ShowMenuState createState() => _ShowMenuState();
+  State<ShowMenu> createState() => _ShowMenuState();
 }
 
 class _ShowMenuState extends State<ShowMenu> {

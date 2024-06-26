@@ -189,6 +189,7 @@ class _UploadImageAndMoreState extends State<UploadImageAndMore> {
 
   Future<void> _delete(String itemId) async {
     await _items.doc(itemId).delete();
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Item deleted successfully")));
   }
 
