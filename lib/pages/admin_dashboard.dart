@@ -31,6 +31,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('Restaurant Management App'),
         actions: [
           IconButton(
@@ -42,7 +43,6 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 MaterialPageRoute(builder: (context) => const HomePage()),
               );
               FirebaseAuth.instance.signOut();
-
             },
           ),
         ],

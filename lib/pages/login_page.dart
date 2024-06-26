@@ -17,28 +17,18 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  void _navigateToHome(BuildContext context) {
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => const HomePage()),
-      (route) => false,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Login"),
+      ),
       body: SafeArea(
         child: Center(
           child: ListView(
             shrinkWrap: true,
             padding: const EdgeInsets.all(20.0),
             children: [
-              IconButton(
-                  onPressed: () {
-                    _navigateToHome(context);
-                  },
-                  icon: const Icon(Icons.arrow_back)),
               const Icon(
                 Icons.person,
                 size: 200,

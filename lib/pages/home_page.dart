@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => const HomePage()),
-          (route) => false,
+      (route) => false,
     );
   }
 
@@ -67,16 +67,23 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Restaurant X',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.black
+        iconTheme: const IconThemeData(
+          size: 28,
+          color: Colors.white,
         ),
+        title: const Text(
+          'Restaurant FaFiFa',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
         backgroundColor: Colors.blueGrey,
         actions: [
           IconButton(
-            icon: const Icon(Icons.account_circle_rounded),
+            icon: const Icon(
+              Icons.account_circle_rounded,
+            ),
             onPressed: () {
               // Handle login action
               Navigator.push(
@@ -99,7 +106,7 @@ class _HomePageState extends State<HomePage> {
               child: Container(
                 alignment: Alignment.center,
                 child: const Text(
-                  'Restaurant X',
+                  'Restaurant FaFiFa',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
@@ -131,21 +138,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   items: const <BottomNavigationBarItem>[
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.home),
-      //       label: 'Home',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.person),
-      //       label: 'Profile',
-      //     ),
-      //   ],
-      //   currentIndex: _selectedIndex,
-      //   selectedItemColor: Colors.amber[800],
-      //   onTap: _onItemTapped,
-      // ),
     );
   }
 }
