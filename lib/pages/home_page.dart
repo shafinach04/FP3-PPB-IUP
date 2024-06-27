@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
           color: Colors.white,
         ),
         title: const Text(
-          'Restaurant FaFiFa',
+          'Restaurant',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
               child: Container(
                 alignment: Alignment.center,
                 child: const Text(
-                  'Restaurant FaFiFa',
+                  'Restaurant',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,

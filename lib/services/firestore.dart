@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:ppb_fp/services/firebase_auth_service.dart';
 import 'dart:io';
 
 class FirestoreService {
@@ -23,11 +24,30 @@ class FirestoreService {
     return menuStream;
   }
 
-  Future<void> addStaff(String staffName, String staffUsername, String staffPassword) {
+  Future<void> addStaff(String name, String email, String password) {
+    FirebaseAuthService auth = FirebaseAuthService();
+    auth.staffSignUp(email, password);
+
     return staff.add({
-      "staffName": staffName,
-      "staffUsername": staffUsername,
-      "staffPassword": staffPassword,
+      "staffName": name,
+      "staffEmail": email,
+      "staffPassword": password,
+    });
+  }
+
+  Future<void> editStaff(DocumentSnapshot staff, name, String email, String password) async {
+    FirebaseFirestore.instance.runTransaction((Transaction t) async {
+      return t.update(staff.reference, {
+        "staffName": name,
+        "staffEmail": email,
+        "staffPassword": password,
+      });
+    });
+  }
+
+  Future<void> deleteStaff(DocumentSnapshot staff) async {
+    FirebaseFirestore.instance.runTransaction((Transaction t) async {
+      t.delete(staff.reference);
     });
   }
 
