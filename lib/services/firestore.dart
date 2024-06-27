@@ -24,6 +24,21 @@ class FirestoreService {
     return menuStream;
   }
 
+  //update
+  Future<void> updateMenuItem(String docID, String newName, double newPrice, String newPictureUrl) {
+    return menu.doc(docID).update({
+      'name': newName,
+      'price': newPrice,
+      'pictureUrl': newPictureUrl,
+      'timestamp': Timestamp.now(),
+    });
+  }
+
+  //delete
+  Future<void> deleteMenuItem(String docID) {
+    return menu.doc(docID).delete();
+  }
+
   Future<void> addStaff(String name, String email, String password) {
     FirebaseAuthService auth = FirebaseAuthService();
     auth.staffSignUp(email, password);
@@ -49,21 +64,6 @@ class FirestoreService {
     FirebaseFirestore.instance.runTransaction((Transaction t) async {
       t.delete(staff.reference);
     });
-  }
-
-  //update
-  Future<void> updateMenuItem(String docID, String newName, double newPrice, String newPictureUrl) {
-    return menu.doc(docID).update({
-      'name': newName,
-      'price': newPrice,
-      'pictureUrl': newPictureUrl,
-      'timestamp': Timestamp.now(),
-    });
-  }
-
-  //delete
-  Future<void> deleteMenuItem(String docID) {
-    return menu.doc(docID).delete();
   }
 
   //upload image

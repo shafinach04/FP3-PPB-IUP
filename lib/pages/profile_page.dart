@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -5,15 +6,12 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
+    String? userEmail = user?.email;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-      ),
-      body: const Center(
-        child: Text(
-          'Profile Page Content',
-          style: TextStyle(color: Colors.white, fontSize: 20),
-        ),
+      body: Center(
+        child: userEmail != null ? Text(userEmail) : const CircularProgressIndicator(),
       ),
     );
   }
